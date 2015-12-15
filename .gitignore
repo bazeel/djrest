@@ -1,0 +1,8 @@
+.idea/
+bin/
+lib/
+local/
+include/
+djrest/public/
+dump/
+*.pyc
