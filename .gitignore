@@ -4,5 +4,6 @@ lib/
 local/
 include/
 djrest/public/
+djrest/local_settings.py
 dump/
 *.pyc
