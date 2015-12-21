@@ -1,30 +1,33 @@
 from django.contrib import admin
-from .models import List, Message
+from .models import UserList, MessageLog, Message
 
 
-class MessageInline(admin.TabularInline):
-    model = Message
-    extra = 0
-    fields = ('user', 'success', 'date_created', 'date_sent')
-    readonly_fields = ('user', 'success', 'date_created', 'date_sent')
+class MessageLogAdmin(admin.ModelAdmin):
+    model = MessageLog
+    list_display = ('id', 'message_id', 'message', 'title', 'user', 'success', 'date_created', 'date_sent', 'response')
+    list_filter = ('success', 'date_created', 'date_sent')
+    search_fields = ['user__username', 'user__first_name', 'user__last_name', 'message__id', 'title']
+
+    def message_id(self, obj):
+        return obj.message.id
+    message_id.short_description = 'message id'
 
 
 class MessageAdmin(admin.ModelAdmin):
     model = Message
-    list_display = ('id', 'listid', 'list', 'title', 'user', 'success', 'date_created', 'date_sent', 'response')
-    list_filter = ('success', 'date_created', 'date_sent')
-    search_fields = ['user__username', 'user__first_name', 'user__last_name', 'list__id', 'title']
+    list_display = ('id', 'userlist_id', 'title', 'date_created', 'processed')
 
-    def listid(self, obj):
-        return obj.list.id
-    listid.short_description = 'list id'
+    def userlist_id(self, obj):
+        return obj.user_list.id
+    userlist_id.short_description = 'user list id'
 
 
-class ListAdmin(admin.ModelAdmin):
-    model = List
-    inlines = [MessageInline]
+class UserListAdmin(admin.ModelAdmin):
+    model = UserList
+    list_display = ('id', 'title', 'date_created')
     filter_horizontal = ['users', ]
 
 
+admin.site.register(UserList, UserListAdmin)
 admin.site.register(Message, MessageAdmin)
-admin.site.register(List, ListAdmin)
+admin.site.register(MessageLog, MessageLogAdmin)

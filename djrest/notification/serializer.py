@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import Message
+from .models import MessageLog
 
 
-class MessageSerializer(serializers.Serializer):
-    pk = serializers.IntegerField(read_only=True)
+class MessageLogSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
     title = serializers.CharField(read_only=True)
     text = serializers.CharField(read_only=True)
     date_sent = serializers.DateTimeField(read_only=True)
@@ -12,7 +12,7 @@ class MessageSerializer(serializers.Serializer):
         """
         Create and return a new `Message` instance, given the validated data.
         """
-        return Message.objects.create(**validated_data)
+        return MessageLog.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         """

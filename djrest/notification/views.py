@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Message
-from .serializer import MessageSerializer
+from .models import MessageLog
+from .serializer import MessageLogSerializer
 
 
-class MessageList(APIView):
+class MessageLogList(APIView):
 
     def get(self, request, format=None):
-        messages = Message.objects.filter(user__id=request.user.id, success=True).order_by('-date_sent')
-        serializer = MessageSerializer(messages, many=True)
+        messages = MessageLog.objects.filter(user__id=request.user.id, success=True).order_by('-date_sent', '-date_created')
+        serializer = MessageLogSerializer(messages, many=True)
         return Response(serializer.data)
