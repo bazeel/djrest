@@ -30,4 +30,5 @@ urlpatterns = [
     #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^messages/$', MessageLogList.as_view()),
+    url(r'^profile/', include('custom_profile.urls')),
 ]
