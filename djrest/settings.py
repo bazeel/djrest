@@ -107,7 +107,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication'
     ],
 }
-
+# email for users from sms registration
+DEFAULT_USER_EMAIL = 'vasiliyzaycev1989@gmail.com'
 
 try:
     from local_settings import *
