@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from .views import smsregister
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^smsregister/$', smsregister, name='smsregister'),
-)
+]
