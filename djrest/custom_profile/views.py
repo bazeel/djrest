@@ -57,6 +57,7 @@ def smsregister(request):
             profile.save()
             user.save()
 
+            #TODO validate number
             message = sendsms(phone, smscode)
 
             data = {'success': True}
