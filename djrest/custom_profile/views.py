@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from .models import UserCustomProfile
+from .utils import sendsms
 
 
 # post json {'phone': 1234567}
@@ -42,7 +43,8 @@ def smsregister(request):
     try:
         if request.method == 'POST':
             received_json_data = json.loads(request.body)
-            username = received_json_data.get('phone')
+            phone = received_json_data.get('phone')
+            username = phone
             password = User.objects.make_random_password()
             user, user_created = User.objects.get_or_create(
                 username=username,
@@ -55,7 +57,7 @@ def smsregister(request):
             profile.save()
             user.save()
 
-            #TODO send sms code
+            message = sendsms(phone, smscode)
 
             data = {'success': True}
 
