@@ -60,7 +60,7 @@ def smsregister(request):
             #TODO validate number
             message = sendsms(phone, smscode)
 
-            data = {'success': True}
+            data = {'success': True, 'status': message.get('status')}
 
         else:
             data = {'success': False}

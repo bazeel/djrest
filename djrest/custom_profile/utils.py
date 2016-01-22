@@ -1,16 +1,18 @@
 from twilio.rest import TwilioRestClient
+from django.conf import settings
 
 
-def sendsms(phone, message):
+def sendsms(phone_to, message):
     # put your own credentials here
-    ACCOUNT_SID = ""
-    AUTH_TOKEN = ""
+    account_sid = settings.TWILIO.ACCOUNT_SID
+    auth_token = settings.TWILIO.AUTH_TOKEN
+    phone_from = settings.TWILIO.FROM
 
-    client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
+    client = TwilioRestClient(account_sid, auth_token)
 
     message = client.messages.create(
-        from_="+12018857872",
-        to=phone,
+        from_=phone_from,
+        to=phone_to,
         body=message,
     )
     return message
