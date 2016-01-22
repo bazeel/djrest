@@ -52,11 +52,13 @@ def validatesmscode(request):
         username = received_json_data.get('phone')
         smscode = received_json_data.get('smscode')
         user = User.objects.get(username=username)
-        # TODO reset sms code after checking
+
         # TODO if code is valid
-        #if :
-        #    token, token_created = Token.objects.get_or_create(user=user)
-        #    data = {'success': True, 'authtoken': token.key}
+        if user.sms_code == smscode:
+            token, token_created = Token.objects.get_or_create(user=user)
+            data = {'success': True, 'authtoken': token.key}
+
+        smscode = received_json_data.get('smscode')
 
     data = {'success': False}
 
