@@ -12,34 +12,6 @@ from .utils import sendsms
 # post json {'phone': 1234567}
 @csrf_exempt
 def smsregister(request):
-    '''
-    if u.is_authenticated():
-        return HttpResponseRedirect(reverse('index'))
-
-    user_form = UserForm()
-    success = False
-    if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        if user_form.is_valid():
-            user_data = user_form.cleaned_data
-            try:
-                user = User.objects.create_user(
-                    user_data['username'],
-                    user_data['email'],
-                    user_data['password'])
-            except Exception:
-                pass
-            else:
-                code = InvitationCode.objects.get(code=user_data['invitation_code'])
-                profile = UserProfile(user=user, invitation_code=code)
-                profile.save()
-                user.first_name = user_data['first_name']
-                user.last_name = user_data['last_name']
-                user.save()
-                success = True
-                user_form = UserForm()
-    '''
-
     try:
         if request.method == 'POST':
             received_json_data = json.loads(request.body)
