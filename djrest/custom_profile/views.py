@@ -56,7 +56,7 @@ def validatesmscode(request):
         smscode = received_json_data.get('smscode')
         user = User.objects.get(username=username)
 
-        if user.custom_profile.sms_code == smscode:
+        if user.custom_profile.sms_code and user.custom_profile.sms_code == smscode:
             token, token_created = Token.objects.get_or_create(user=user)
             data = {'success': True, 'authtoken': token.key}
         else:
