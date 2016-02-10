@@ -1,4 +1,4 @@
-#Google Cloud Messaging
+# -*- coding: utf-8 -*-
 from gcm import GCM
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
@@ -13,8 +13,8 @@ class Command(BaseCommand):
         registration_ids = [settings.TEST_REG_ID, ]
 
         notification = {
-            "title": "Test title",
-            "message": "Tap here to start the update!",
+            "title": "Тестовый заголовок",
+            "message": "Tестовый текст!",
             #"uri": "market://details?id=gcm.play.android.samples.com.gcmquickstart"
         }
 
